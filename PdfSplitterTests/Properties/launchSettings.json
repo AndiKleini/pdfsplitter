@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "PdfSplitterTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Key": "Value",
+        "ITEXT_GS_EXEC": "C:\\Program Files\\gs\\gs9.56.1\\bin\\gswin64c.exe"
+      }
+    }
+  }
+}

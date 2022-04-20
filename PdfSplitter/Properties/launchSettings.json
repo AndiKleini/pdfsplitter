@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PdfSplitter": {
+      "commandName": "Project",
+      "commandLineArgs": "-s C:\\Users\\aKlein\\Documents\\Benjamin_Toth_HÜ_51.docx -o C:\\Users\\aKlein\\Documents\\"
+    }
+  }
+}
