@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfSplitter", ".\PdfSplitter\PdfSplitter.csproj", "{D12B8E92-E189-4C05-8379-FC3E23BC2681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfSplitter", "PdfSplitter\PdfSplitter.csproj", "{D12B8E92-E189-4C05-8379-FC3E23BC2681}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2BFBD03E-C54B-415E-AF92-1AC92F042C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfSplitterTests", ".\PdfSplitterTests\PdfSplitterTests.csproj", "{079FD9A8-1C0E-4111-884A-F6B05EC095D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfSplitterTests", "PdfSplitterTests\PdfSplitterTests.csproj", "{079FD9A8-1C0E-4111-884A-F6B05EC095D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32798D28-5AAE-4591-B5B8-409A47D78970}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

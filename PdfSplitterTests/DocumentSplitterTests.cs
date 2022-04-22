@@ -6,6 +6,8 @@ using FluentAssertions.Execution;
 
 namespace DocumentSplitterTests
 {
+    [TestFixture]
+    [Category("RequiresCompareVisually")]
     public class Tests
     {
         [Test]
