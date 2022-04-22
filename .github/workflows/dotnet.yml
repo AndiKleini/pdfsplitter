@@ -20,3 +20,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal --filter TestCategory!=RequiresCompareVisually
+    - uses: actions/upload-artifact@v3
+      with:
+        name: PdfSplitter
+        path: /output
