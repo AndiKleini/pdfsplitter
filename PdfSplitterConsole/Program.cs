@@ -1,9 +1,7 @@
 ﻿using iText.Kernel.Pdf;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using PdfSplitter;
 
-namespace DocumentSplitter
+namespace PdfSplitterConsole
 {
     class Program
     {
@@ -36,3 +34,4 @@ namespace DocumentSplitter
         }
     }
 }
+

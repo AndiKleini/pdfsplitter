@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PdfSplitterConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "-s C:\\Users\\aKlein\\Documents\\BIF4-SWEN2_05_SubViewModel_Java.pdf -o C:\\Users\\aKlein\\Documents\\"
+    }
+  }
+}

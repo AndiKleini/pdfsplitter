@@ -1,9 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using DocumentSplitter;
-using System;
+using PdfSplitterConsole;
 
-namespace PdfSplitterTests
+namespace PdfSplitterConsoleTests
 {
     [TestFixture]
     public class ArgumentParserTests

@@ -1,10 +1,9 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Framework;
-using DocumentSplitter;
-using System.Collections.Generic;
+using PdfSplitterConsole;
 
-namespace PdfSplitterTests
+namespace PdfSplitterConsoleTests
 {
     [TestFixture]
     public class SplittingArgumentsTests
@@ -19,7 +18,7 @@ namespace PdfSplitterTests
 
             bool canExecute = instanceUnderTest.CanExecute(out cannotExecuteInfos);
 
-            using (new AssertionScope());
+            using (new AssertionScope()) ;
             canExecute.Should().BeFalse();
             cannotExecuteInfos.Should().ContainMatch("*InputPath*not*exist*");
         }
@@ -65,7 +64,7 @@ namespace PdfSplitterTests
 
             bool canExecute = instanceUnderTest.CanExecute(out cannotExecuteInfos);
 
-            using (new AssertionScope());
+            using (new AssertionScope()) ;
             canExecute.Should().BeFalse();
             cannotExecuteInfos.Should().ContainMatch("*InputPath*not*pdf*");
         }

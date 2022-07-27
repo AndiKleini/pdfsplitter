@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DocumentSplitter
+namespace PdfSplitterConsole
 {
     public static class ArgumentParser
     {

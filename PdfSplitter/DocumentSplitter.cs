@@ -2,7 +2,7 @@
 using iText.Kernel.Utils;
 using System.Linq;
 
-namespace DocumentSplitter
+namespace PdfSplitter
 {
     public class DocumentSplitter : iText.Kernel.Utils.PdfSplitter
     {
@@ -29,7 +29,7 @@ namespace DocumentSplitter
 
         protected override PdfWriter GetNextPdfWriter(PageRange documentPageRange)
         {
-            return new PdfWriter($"{this.targetPath}/{this.targetFileName}_{this.currentPage++}.pdf");
+            return new PdfWriter($"{targetPath}/{targetFileName}_{currentPage++}.pdf");
         }
     }
 }

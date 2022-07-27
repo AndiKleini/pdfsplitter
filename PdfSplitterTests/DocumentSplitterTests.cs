@@ -3,6 +3,7 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Utils;
 using NUnit.Framework;
 using FluentAssertions.Execution;
+using PdfSplitter;
 
 namespace DocumentSplitterTests
 {
@@ -16,7 +17,7 @@ namespace DocumentSplitterTests
             var src = "./Data/Bestellformular_VOR_Klimaticket.pdf";
             var pdfDocument = new PdfDocument(new PdfReader(src));
             const string TargetFileName = "Target";
-            DocumentSplitter.DocumentSplitter.SplitByPages(pdfDocument, "./", TargetFileName);
+            DocumentSplitter.SplitByPages(pdfDocument, "./", TargetFileName);
 
             using (new AssertionScope());
             ShouldBeEqual("./Data/Bestellformular_VOR_Klimaticket_Page_1.pdf", $"./{TargetFileName}_1.pdf");
@@ -34,7 +35,7 @@ namespace DocumentSplitterTests
             var src = "./Data/TestData.pdf";
             var pdfDocument = new PdfDocument(new PdfReader(src));
             const string TargetFileName = "TestDataReceived";
-            DocumentSplitter.DocumentSplitter.SplitByPages(pdfDocument, "./", TargetFileName);
+            DocumentSplitter.SplitByPages(pdfDocument, "./", TargetFileName);
 
             using (new AssertionScope());
             ShouldBeEqual("./Data/TestDataExpected_1.pdf", $"./{TargetFileName}_1.pdf");
