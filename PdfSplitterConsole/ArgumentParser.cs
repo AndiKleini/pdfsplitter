@@ -5,6 +5,7 @@ namespace PdfSplitterConsole
     public static class ArgumentParser
     {
         private const string DefaultOutputPath = "./";
+        private readonly static string[] commandSwitches = { "-s", "-o" };
 
         public static SplittingArguments Parse(string[] arguments)
         {
@@ -12,36 +13,48 @@ namespace PdfSplitterConsole
             {
                 throw new ArgumentException("Arguments are missing.");
             }
-            SplittingArguments splittingArguments = new();
-            var enumerator = arguments.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                string currentSwitch = (string)enumerator.Current;
-                Action<string> propertySetter = currentSwitch switch
-                {
-                    "-s" => extractedValue => splittingArguments.InputPath = extractedValue,
-                    "-o" => extractedValue => splittingArguments.OutputPath = extractedValue,
-                    _ => throw new ArgumentException($"Unsupported switch {currentSwitch} supplied. Check your input arguments."),
-                };
-                if (enumerator.MoveNext())
-                {
-                    propertySetter((string)enumerator.Current);
-                }
-                else
-                {
-                    throw new ArgumentException($"Subsequent value for switch {currentSwitch} was missing. Check your input arguments.");
-                }
-            }
-            CompleteWithDefaultValues(splittingArguments);
+            SplittingArguments splittingArguments = ExtractArgumentsFrom(arguments);
+            CompleteWithDefaultValuesOrThrow(splittingArguments);
             return splittingArguments;
 
-            static void CompleteWithDefaultValues(SplittingArguments splittingArguments)
+            static void CompleteWithDefaultValuesOrThrow(SplittingArguments splittingArguments)
             {
                 if (splittingArguments.OutputPath == null)
                 {
                     splittingArguments.OutputPath = DefaultOutputPath;
                 }
-            }  
+
+                if (splittingArguments.InputPath == null)
+                {
+                    throw new ArgumentException($"Input path not specified. Check whether you have applied -s correctly.");
+                }
+            }
+
+            static SplittingArguments ExtractArgumentsFrom(string[] arguments)
+            {
+                SplittingArguments splittingArguments = new();
+                string? currentSwitch = null;
+                return arguments.Aggregate(
+                    new(),
+                    (Func<SplittingArguments, string, SplittingArguments>)((currentSplittingArguments, argument) =>
+                    {
+                        if (commandSwitches.Contains(argument))
+                        {
+                            currentSwitch = argument;
+                        }
+                        else
+                        {
+                            Action<string> propertySetter = currentSwitch switch
+                            {
+                                "-s" => extractedValue => currentSplittingArguments.InputPath += extractedValue,
+                                "-o" => extractedValue => currentSplittingArguments.OutputPath += extractedValue,
+                                _ => throw new ArgumentException($"Unsupported switch {currentSwitch} supplied. Check your input arguments."),
+                            };
+                            propertySetter(argument);
+                        }
+                        return currentSplittingArguments;
+                    }));
+            }
         }
     }
 }

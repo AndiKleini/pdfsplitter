@@ -8,7 +8,7 @@ namespace PdfSplitterConsoleTests
     public class ArgumentParserTests
     {
         [Test]
-        public void From_InputPathOnlySupplied_ReturnsArgumentInstance()
+        public void Parse_InputPathOnlySupplied_ReturnsArgumentInstance()
         {
             const string InputFilePath = "./Data/TestData.pdf";
 
@@ -24,7 +24,7 @@ namespace PdfSplitterConsoleTests
         }
 
         [Test]
-        public void From_OutputPathSupplied_ReturnsArgumentInstanceWithProperOutputPath()
+        public void Parse_OutputPathSupplied_ReturnsArgumentInstanceWithProperOutputPath()
         {
             const string InputFilePath = "somethingThatIsNotRelevantForThisTest";
             const string OutputPath = "./Data";
@@ -34,7 +34,7 @@ namespace PdfSplitterConsoleTests
         }
 
         [Test]
-        public void From_OutputPathSuppliedBeforeInputPath_ReturnsArgumentInstanceWithProperOutputPath()
+        public void Parse_OutputPathSuppliedBeforeInputPath_ReturnsArgumentInstanceWithProperOutputPath()
         {
             const string InputFilePath = "somethingThatIsNotRelevantForThisTest";
             const string OutputPath = "./Data";
@@ -44,7 +44,7 @@ namespace PdfSplitterConsoleTests
         }
 
         [Test]
-        public void From_InvalidSwitchSpecifiedForInputPath_Throws()
+        public void Parse_InvalidSwitchSpecifiedForInputPath_Throws()
         {
             const string InputFilePath = "somethingThatIsNotRelevantForThisTest";
             Action testFunction = () =>  ArgumentParser.Parse(new string[] { "-unknown", InputFilePath });
@@ -53,7 +53,7 @@ namespace PdfSplitterConsoleTests
         }
 
         [Test]
-        public void From_INoInputPathSpecified_Throws()
+        public void Parse_INoInputPathSpecified_Throws()
         {
             Action testFunction = () => ArgumentParser.Parse(new string[] { "-s" });
 
@@ -61,7 +61,7 @@ namespace PdfSplitterConsoleTests
         }
 
         [Test]
-        public void From_EmptyArgumentsPassed_Throws()
+        public void Parse_EmptyArgumentsPassed_Throws()
         {
             Action testFunction = () => ArgumentParser.Parse(new string[] { });
 
@@ -69,11 +69,24 @@ namespace PdfSplitterConsoleTests
         }
 
         [Test]
-        public void From_NullAsArgumentPassed_Throws()
+        public void Parse_NullAsArgumentPassed_Throws()
         {
             Action testFunction = () => ArgumentParser.Parse(null);
 
             testFunction.Should().Throw<ArgumentException>();
+        }
+
+        [Test]
+        public void Parse_OutputPathContainsWhiteSpaces_ReturnsArgumentInstanceWithProperOuitputPath()
+        {
+            const string InputFilePath = "./Data";
+            const string OutputPathPart1 = "something";
+            const string OutputPathPart2 = "containing";
+            const string OutputPathPart3 = "white";
+            const string CombinedOutPutPath = OutputPathPart1 + OutputPathPart2 + OutputPathPart3;
+            SplittingArguments instanceUnderTest = ArgumentParser.Parse(new string[] { "-s", InputFilePath, "-o", OutputPathPart1, OutputPathPart2, OutputPathPart3 });
+
+            instanceUnderTest.OutputPath.Should().BeEquivalentTo(CombinedOutPutPath);
         }
     }
 }
