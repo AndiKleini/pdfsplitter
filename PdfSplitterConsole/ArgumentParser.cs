@@ -26,31 +26,34 @@ namespace PdfSplitterConsole
 
                 if (splittingArguments.InputPath == null)
                 {
-                    throw new ArgumentException($"Input path not specified. Check whether you have applied -s correctly.");
+                    throw new ArgumentException("Input path not specified. Check whether you have applied -s correctly.");
                 }
             }
 
             static SplittingArguments ExtractArgumentsFrom(string[] arguments)
             {
                 SplittingArguments splittingArguments = new();
-                string? currentSwitch = null;
+                Action<string>? addArgumentToCurrentSwitchProperty = null;
                 return arguments.Aggregate(
                     new(),
                     (Func<SplittingArguments, string, SplittingArguments>)((currentSplittingArguments, argument) =>
                     {
                         if (commandSwitches.Contains(argument))
                         {
-                            currentSwitch = argument;
-                        }
-                        else
-                        {
-                            Action<string> propertySetter = currentSwitch switch
+                            addArgumentToCurrentSwitchProperty = argument switch
                             {
                                 "-s" => extractedValue => currentSplittingArguments.InputPath += (currentSplittingArguments.InputPath == null ? String.Empty : " ") + extractedValue,
                                 "-o" => extractedValue => currentSplittingArguments.OutputPath += (currentSplittingArguments.OutputPath == null ? String.Empty : " ") + extractedValue,
-                                _ => throw new ArgumentException($"Unsupported switch {currentSwitch} supplied. Check your input arguments."),
+                                _ => throw new ArgumentException($"Unsupported switch {argument} supplied. Check your input arguments."),
                             };
-                            propertySetter(argument);
+                        }
+                        else if(addArgumentToCurrentSwitchProperty != null)
+                        {
+                            addArgumentToCurrentSwitchProperty(argument);
+                        }
+                        else
+                        {
+                            throw new ArgumentException("Invalid sequence of input arguments. Check if required switch (e.g.: -o, -s) is missing.");
                         }
                         return currentSplittingArguments;
                     }));
