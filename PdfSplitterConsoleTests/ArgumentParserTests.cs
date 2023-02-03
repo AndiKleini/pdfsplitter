@@ -82,8 +82,8 @@ namespace PdfSplitterConsoleTests
             const string InputFilePath = "./Data";
             const string OutputPathPart1 = "something";
             const string OutputPathPart2 = "containing";
-            const string OutputPathPart3 = "white";
-            const string CombinedOutPutPath = OutputPathPart1 + OutputPathPart2 + OutputPathPart3;
+            const string OutputPathPart3 = "whitespaces";
+            const string CombinedOutPutPath = OutputPathPart1 + " " + OutputPathPart2 + " " + OutputPathPart3;
             SplittingArguments instanceUnderTest = ArgumentParser.Parse(new string[] { "-s", InputFilePath, "-o", OutputPathPart1, OutputPathPart2, OutputPathPart3 });
 
             instanceUnderTest.OutputPath.Should().BeEquivalentTo(CombinedOutPutPath);

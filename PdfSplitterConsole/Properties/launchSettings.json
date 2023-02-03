@@ -2,7 +2,7 @@
   "profiles": {
     "PdfSplitterConsole": {
       "commandName": "Project",
-      "commandLineArgs": "-s C:\\Users\\aKlein\\Documents\\BIF4-SWEN2_05_SubViewModel_Java.pdf -o C:\\Users\\aKlein\\Documents\\"
+      "commandLineArgs": "-s C:\\Users\\aKlein\\Documents\\EA\\People\\Gehaltsanpassungen_01_2023\\OneDrive_1_1-11-2023\\202301_Gehaltserhöhungen_People Guide Engineering 4.pdf -o C:\\Users\\aKlein\\Documents\\"
     }
   }
 }

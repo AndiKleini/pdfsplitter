@@ -46,8 +46,8 @@ namespace PdfSplitterConsole
                         {
                             Action<string> propertySetter = currentSwitch switch
                             {
-                                "-s" => extractedValue => currentSplittingArguments.InputPath += extractedValue,
-                                "-o" => extractedValue => currentSplittingArguments.OutputPath += extractedValue,
+                                "-s" => extractedValue => currentSplittingArguments.InputPath += (currentSplittingArguments.InputPath == null ? String.Empty : " ") + extractedValue,
+                                "-o" => extractedValue => currentSplittingArguments.OutputPath += (currentSplittingArguments.OutputPath == null ? String.Empty : " ") + extractedValue,
                                 _ => throw new ArgumentException($"Unsupported switch {currentSwitch} supplied. Check your input arguments."),
                             };
                             propertySetter(argument);
